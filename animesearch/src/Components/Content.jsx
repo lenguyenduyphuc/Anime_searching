@@ -1,4 +1,3 @@
-import React from 'react';
 import Anime from './Anime';
 
 const Content = ({ animes, setAnimes }) => {

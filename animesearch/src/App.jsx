@@ -10,7 +10,7 @@ const App = () => {
 
     useEffect(() => {
         axios
-        .get('https://api.jikan.moe/v4/anime')
+        .get('https://api.jikan.moe/v4/top/anime')
         .then((response) => {
             console.log('Fetch successful');
             setAllAnimes(response.data.data); // Correctly accessing the 'data' array

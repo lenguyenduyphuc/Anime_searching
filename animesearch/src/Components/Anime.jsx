@@ -1,8 +1,6 @@
-import React from 'react'
-
 const Anime = ({ anime }) => {
     if (!anime) {
-        return <p>No anime data available</p>; // Handle case where anime is not passed or is undefined.
+        return <p>No anime data available</p>; 
     }
 
     // Fallback for missing title
@@ -12,6 +10,7 @@ const Anime = ({ anime }) => {
         <div>
             <h1>{title}</h1>
             <p>Episodes: {anime.episodes ? anime.episodes : "Data not available"}</p> {/* Display fallback if episodes is missing */}
+            <img src={anime.images.jpg.large_image_url} alt={anime.images.jpg.large_image_url} />
         </div>
     )
 }
