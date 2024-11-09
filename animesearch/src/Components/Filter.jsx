@@ -1,13 +1,15 @@
-import React from 'react'
+import React from 'react';
 
-const Filter = ({value, onChange}) => {
+const Filter = ({ value, onChange }) => {
     return (
         <div>
-            find countries <input
-                value={value} onChange={onChange}
+            find anime 
+            <input
+                value={value}       // Controlled input, value comes from the parent component
+                onChange={onChange} // Handles changes to the input field
             />
         </div>
-    )
+    );
 }
 
-export default Filter
+export default Filter;
