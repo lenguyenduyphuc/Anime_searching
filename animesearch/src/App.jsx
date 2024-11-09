@@ -8,14 +8,29 @@ const App = () => {
     const [allAnimes, setAllAnimes] = useState([]);
     const [newFilter, setNewFilter] = useState('');
 
-    useEffect(() => {
-        axios
-        .get('https://api.jikan.moe/v4/top/anime')
-        .then((response) => {
-            console.log('Fetch successful');
-            setAllAnimes(response.data.data); // Correctly accessing the 'data' array
-        });
-    }, []);
+	useEffect(() => {
+		// Using Promise.all to handle both API calls concurrently
+		Promise.all([
+		  axios.get('https://api.jikan.moe/v4/top/anime'),   // First API call for top animes
+		  axios.get('https://api.jikan.moe/v4/seasons/upcoming') // Second API call for upcoming animes
+		])
+		.then(([topAnimesResponse, upcomingAnimesResponse]) => {
+		  console.log('Top Anime Fetch Successful');
+		  console.log('Upcoming Anime Fetch Successful');
+		  
+		  // Combine both sets of animes
+		  const allAnimes = [
+			...topAnimesResponse.data.data,      // Add top animes to the list
+			...upcomingAnimesResponse.data.data // Add upcoming animes to the list
+		  ];
+	
+		  // Set the combined data in the state
+		  setAllAnimes(allAnimes);
+		})
+		.catch((error) => {
+		  console.error('Error fetching anime data:', error);
+		});
+	  }, []); // Empty dependency array ensures this runs only once when the component mounts
 
     const handleFilterChange = (event) => {
         const filter = event.target.value;
